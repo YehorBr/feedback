@@ -1,5 +1,3 @@
-import { Component } from "react";
-
 export const Statistics = ({good, neutral, bad}) => {
         let total = 0
         total = good + neutral + bad
