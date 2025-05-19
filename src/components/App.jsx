@@ -3,46 +3,38 @@ import { ButtonList } from "./ButtonList/ButtonList";
 import { Statistics } from "./Statistics/Statistics";
 import { Notification } from "./Notification/Notification";
 import { GlobalStyle } from "../GlobalStyle";
+import { useState } from "react";
 
-export class App extends Component{
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0
-  }
+export const App = ()=>{
+  const [good, setGood] = useState(0)
+  const [neutral, setneutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+
   
-  onGood = () =>{
-    this.setState((prevState)=>{
-      return {good: prevState.good += 1}
-    })
+  const onGood = () =>{
+    setGood(prevState=>prevState += 1)
 
   }
 
-  onNeutral = () =>{
-    this.setState(prevState=>{
-      return {neutral: prevState.neutral += 1}
-    })
-
+  const onNeutral = () =>{
+    setneutral(prevState=> prevState += 1)
   }
 
-  onBad = () =>{
-    this.setState((prevState)=>{
-      return {bad: prevState.bad += 1}
-    })
+  const onBad = () =>{
+    setBad(prevState=>prevState += 1)
   }
 
-  render(){
     
     return<>
       <h1>Please leave feedback</h1>
 
-      <ButtonList onGood={this.onGood} onNeutral={this.onNeutral} onBad={this.onBad}/>
+      <ButtonList onGood={onGood} onNeutral={onNeutral} onBad={onBad}/>
 
       <h2>Statistics</h2>
 
-      {this.state.good || this.state.neutral || this.state.bad ? <Statistics good={this.state.good} neutral={this.state.neutral}  bad={this.state.bad}/> : <Notification message="There is no feedback"/>}
+      {good || neutral || bad ? <Statistics good={good} neutral={neutral}  bad={bad}/> : <Notification message="There is no feedback"/>}
 
       <GlobalStyle/>
     </>
-  }
 }
